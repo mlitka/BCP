@@ -19,7 +19,7 @@ public class Edge {
     }
 
     public boolean isValid(){
-        return Math.abs(vert1.getColor().getValue() - vert2.getColor().getValue())>=weight ? true:false;
+        return Math.abs(vert1.getColor().getValue() - vert2.getColor().getValue())>=weight;
     }
 
     public int getWeight() {
