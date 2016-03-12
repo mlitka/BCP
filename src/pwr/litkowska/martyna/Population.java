@@ -1,6 +1,9 @@
 package pwr.litkowska.martyna;
 
+import javafx.print.Collation;
+
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -38,6 +41,14 @@ public class Population {
         }
     }
 
+    public void generatePopulation(int index){
+        for (int i = index; i<size; i++){
+            Genotype genotype = new Genotype(sizeOfGenotype, max_generate);
+            genotype.generateGenotype();
+            population.add(genotype);
+        }
+    }
+
     public int checkStopCondition(double stopCond){
         int check = -1;
         for (Genotype genotype:population){
@@ -59,6 +70,11 @@ public class Population {
             }
         }
         return genotype;
+    }
+
+    public void selectBest(int howMany){
+        Collections.sort(population);
+        population = population.subList(0,howMany);
     }
 
     public List<Genotype> getPopulation() {

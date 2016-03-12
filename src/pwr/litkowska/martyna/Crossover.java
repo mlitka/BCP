@@ -10,17 +10,19 @@ import java.util.List;
 public class Crossover {
 
     private int numOfCrossOvers;
+    private double probabilityOfCrossover;
 
-    public Crossover(int numOfCrossOvers) {
+    public Crossover(int numOfCrossOvers, double probabilityOfCrossover) {
         this.numOfCrossOvers = numOfCrossOvers;
+        this.probabilityOfCrossover= probabilityOfCrossover;
     }
 
     public void crossPopulation(Population population){
         Genotype genotype1;
         Genotype genotype2;
         for(int i = 0; i<numOfCrossOvers; i++){
-            genotype1 = population.getPopulation().get((int)(Math.random() * ((population.getPopulation().size() - 2) + 1)));
-            genotype2 = population.getPopulation().get((int)(Math.random() * ((population.getPopulation().size() - 2) + 1)));
+            genotype1 = population.getPopulation().get((int)(probabilityOfCrossover*(Math.random() * ((population.getPopulation().size() - 2) + 1))));
+            genotype2 = population.getPopulation().get((int)(probabilityOfCrossover*(Math.random() * ((population.getPopulation().size() - 2) + 1))));
             crossGenotypes(genotype1, genotype2);
         }
     }
@@ -37,7 +39,7 @@ public class Crossover {
 
         for(int i = 0; i<index; i++){
             genotype1.getGenotype().get(i).setValue(g2.get(index-1-i).getValue());
-            genotype2.getGenotype().get(index-1-i).setValue(g1.get(0).getValue());
+            genotype2.getGenotype().get(index-i).setValue(g1.get(0).getValue());
         }
     }
 }
