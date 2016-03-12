@@ -12,7 +12,7 @@ public class Color {
     }
 
     public String toString(){
-        return " {color: " + value + "}";
+        return " {c: " + value + "}";
     }
 
     public void generateColor(int max){

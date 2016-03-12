@@ -13,14 +13,19 @@ public class Genotype implements Comparable<Genotype>{
 
     private int size;
     private List<Color> genotype;
-    private int max_generate;
-    private double evaluationValue;
+    private int max_generate = 20;
+    private double evaluationValue = 0;
 
     public Genotype(int size, int max_generate) {
         this.size = size;
         this.max_generate = max_generate;
         genotype = new ArrayList<Color>();
-        evaluationValue = 0;
+    }
+
+    public Genotype(List<Color> genotype) {
+        this.genotype = genotype;
+        size = genotype.size();
+
     }
 
     public void generateGenotype(){
@@ -48,6 +53,7 @@ public class Genotype implements Comparable<Genotype>{
             toStr+=" ";
         }
         toStr+="]";
+        toStr+="\n eval= "+evaluationValue;
         return toStr;
     }
 

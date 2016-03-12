@@ -16,6 +16,7 @@ public class Graph {
     private List<Edge> edges;
     private int numberOfVertices;
     private int numberOfEdges;
+    private Genotype genotype;
 
     public Graph() {
         vertices = new ArrayList<Vertex>();
@@ -91,11 +92,12 @@ public class Graph {
         return invalidEdges;
     }
 
-    public void setColors(List<Color> genotype)
+    public void setColors(Genotype genotype)
     {
-        for(int i = 0; i<genotype.size(); i++){
-            findVertById(i+1).setColor(genotype.get(i));
+        for(int i = 0; i<genotype.getGenotype().size(); i++){
+            findVertById(i+1).setColor(genotype.getGenotype().get(i));
         }
+        this.genotype = genotype;
     }
 
     public String toString(){
@@ -105,6 +107,14 @@ public class Graph {
             toStr += e.toString();
         }
         return toStr;
+    }
+
+    public Genotype getGenotype() {
+        return genotype;
+    }
+
+    public void setGenotype(Genotype genotype) {
+        this.genotype = genotype;
     }
 
     public List<Vertex> getVertices() {

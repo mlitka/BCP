@@ -24,7 +24,7 @@ public class Population {
         String toStr = "* POPULATION *\n";
         for(Genotype genotype:population){
             toStr+=genotype;
-            toStr+="\n";
+            toStr+=" eval= " + genotype.getEvaluationValue() + "\n";
         }
         toStr+="* * *";
         return toStr;
@@ -47,6 +47,18 @@ public class Population {
             }
         }
         return check;
+    }
+
+    public Genotype getBestGenotypeOfPopulation(){
+        Genotype genotype = null;
+        double min = 10000;
+        for(Genotype g:population){
+            if(g.getEvaluationValue()<min && g.getEvaluationValue()!=0){
+                genotype = g;
+                min = g.getEvaluationValue();
+            }
+        }
+        return genotype;
     }
 
     public List<Genotype> getPopulation() {
