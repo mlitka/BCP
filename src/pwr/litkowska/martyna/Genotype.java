@@ -37,13 +37,13 @@ public class Genotype implements Comparable<Genotype>{
     }
 
     public Color getMaxColor(){
-        Color min = genotype.get(0);
+        Color max = genotype.get(0);
         for(Color color:genotype){
-            if(color.getValue()>min.getValue()){
-                min = color;
+            if(color.getValue()>max.getValue()){
+                max = color;
             }
         }
-        return min;
+        return max;
     }
 
     public String toString(){

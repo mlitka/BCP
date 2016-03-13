@@ -12,7 +12,15 @@ public class Mutation {
     }
 
     public Population mutate(Population population){
-        
+        population.sortPopulation();
+        Genotype genotype1;
+        for (int i= population.getNumOfGenotypesInPop()/2; i<population.getNumOfGenotypesInPop(); i++){
+            if (Math.random()>probabilityOfMutation){
+                genotype1 = population.getPopulation().get((int)(Math.random() * ((population.getNumOfGenotypesInPop() - 2) + 1)));
+
+            }
+        }
+
 
         return population;
     }

@@ -11,6 +11,10 @@ public class Color {
         this.value = 0;
     }
 
+    public Color(int value) {
+        this.value = value;
+    }
+
     public String toString(){
         return " {c: " + value + "}";
     }

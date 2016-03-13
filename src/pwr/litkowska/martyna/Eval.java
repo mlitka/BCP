@@ -15,16 +15,17 @@ public class Eval {
         evaluationValue = 0;
     }
 
-    public void evaluate(Genotype genotype){
-        graph.setColors(genotype);
+    public double evaluate(Genotype genotype){
+        this.graph.setColors(genotype);
         evaluationValue = alpha*genotype.getMaxColor().getValue() + (1-alpha)*graph.getNumOfInvalidEdges();
 //        graph.getGenotype().setEvaluationValue(evaluationValue);
         genotype.setEvaluationValue(evaluationValue);
+        return evaluationValue;
     }
 
     public void evaluatePopulation(Population population){
         for (Genotype genotype:population.getPopulation()){
-            evaluate(genotype);
+            if (genotype.getGenotype().size()!=0)evaluate(genotype);
         }
     }
 

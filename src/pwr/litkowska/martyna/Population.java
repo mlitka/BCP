@@ -15,12 +15,14 @@ public class Population {
     private int size;
     private int sizeOfGenotype;
     private int max_generate;
+    private int numOfGenotypesInPop;
 
     public Population(int size, int sizeOfGenotype, int max_generate) {
         this.size = size;
         this.sizeOfGenotype = sizeOfGenotype;
         this.max_generate = max_generate;
         population = new ArrayList<>();
+        numOfGenotypesInPop = 0;
     }
 
     public String toString(){
@@ -39,21 +41,23 @@ public class Population {
             genotype.generateGenotype();
             population.add(genotype);
         }
+        numOfGenotypesInPop = size;
     }
 
     public void generatePopulation(int index){
         for (int i = index; i<size; i++){
             Genotype genotype = new Genotype(sizeOfGenotype, max_generate);
             genotype.generateGenotype();
-            population.add(genotype);
+            this.addGenotype(genotype);
         }
     }
 
     public int checkStopCondition(double stopCond){
         int check = -1;
         for (Genotype genotype:population){
-            if(genotype.getEvaluationValue()<=stopCond){
+            if(genotype.getGenotype().size()!=0 && genotype.getEvaluationValue()<=stopCond){
                 check = population.indexOf(genotype);
+
                 break;
             }
         }
@@ -75,6 +79,39 @@ public class Population {
     public void selectBest(int howMany){
         Collections.sort(population);
         population = population.subList(0,howMany);
+    }
+
+    public void sortPopulation(){
+        Collections.sort(population);
+    }
+
+    public void removeGenotype(Genotype genotype){
+        this.population.remove(genotype);
+        numOfGenotypesInPop--;
+    }
+
+    public void addGenotype(Genotype genotype){
+        this.population.add(genotype);
+        numOfGenotypesInPop++;
+    }
+
+    public void addChildren(List<Genotype> genotypes){
+        for (Genotype genotype:genotypes){
+            if(numOfGenotypesInPop<size){
+                this.addGenotype(genotype);
+            } else {
+                break;
+            }
+        }
+
+        if(numOfGenotypesInPop<size){
+            generatePopulation(numOfGenotypesInPop);
+        }
+    }
+
+    public void setSelected(Population selected){
+        this.population = selected.getPopulation();
+        this.numOfGenotypesInPop = selected.numOfGenotypesInPop;
     }
 
     public List<Genotype> getPopulation() {
@@ -107,5 +144,9 @@ public class Population {
 
     public void setMax_generate(int max_generate) {
         this.max_generate = max_generate;
+    }
+
+    public int getNumOfGenotypesInPop() {
+        return numOfGenotypesInPop;
     }
 }
