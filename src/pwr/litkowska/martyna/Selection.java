@@ -26,10 +26,10 @@ public class Selection {
             Genotype gen1 = this.contest(population);
 
             Genotype gen2 = this.contest(population);
-            while (gen2.equals(gen1))
+//            while (checkSimilarity(gen1, gen2)>0.5)
                 gen2 = this.contest(population);
 
-            List<Genotype> list  =this.crossover.crossGenotypes(gen1, gen2);
+            List<Genotype> list  = this.crossover.crossGenotypes(gen1, gen2);
             list.add(gen1);
             list.add(gen2);
             for (int j = 0; j< list.size(); j++){
@@ -56,5 +56,15 @@ public class Selection {
     private Genotype findGenotype(Population population) {
         Genotype genotype = population.getPopulation().get((int) (Math.random() * population.getNumOfGenotypesInPop() - 1) + 1);
         return genotype;
+    }
+
+    private double checkSimilarity(Genotype gen1, Genotype gen2){
+        double similarity = 0;
+        for(int i =0; i<gen1.getGenotype().size(); i++){
+            if (gen1.getGenotype().get(i).getValue()==gen2.getGenotype().get(i).getValue())
+                similarity++;
+        }
+
+        return similarity/gen1.getGenotype().size();
     }
 }

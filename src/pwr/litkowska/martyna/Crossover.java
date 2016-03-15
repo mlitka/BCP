@@ -36,30 +36,24 @@ public class Crossover {
     public List<Genotype> crossGenotypes(Genotype genotype1, Genotype genotype2) {
 
         List<Genotype> newGenotypes = new ArrayList<>();
-        if (Math.random() < probabilityOfCrossover && genotype1!=genotype2){
+        if (Math.random() < probabilityOfCrossover){
 
-            int index = genotype1.getGenotype().size() / 2;
-            List<Color> g1 = genotype1.getGenotype().subList(0, index);
-            List<Color> g2 = genotype2.getGenotype().subList(index, genotype2.getGenotype().size());
+            int index = (int) (Math.random() * ((genotype1.getGenotype().size() - 1) + 1));
+//            List<Color> g1 = genotype1.getGenotype().subList(0, index);
+//            List<Color> g2 = genotype2.getGenotype().subList(index, genotype2.getGenotype().size());
 
-            List<Color> gen1 = new ArrayList<>(genotype1.getGenotype().size());
-            List<Color> gen2 = new ArrayList<>(genotype1.getGenotype().size());
+            List<Color> gen1 = new ArrayList<>();
+            List<Color> gen2 = new ArrayList<>();
 
             for (int i = 0; i < index; i++) {
-                if (g2.size() != 0 && g1.size() != 0) {
-                    gen1.add(g1.get(i));
-                    gen2.add(g2.get(i));
-
-                }
+                    gen1.add(genotype1.getGenotype().get(i));
+                    gen2.add(genotype2.getGenotype().get(i));
 //            genotype1.getGenotype().get(i).setValue(g2.get(index-1-i).getValue());
 //            genotype2.getGenotype().get(index-i).setValue(g1.get(0).getValue());
             }
-            for (int i = 0; i < index; i++) {
-                if (g2.size() != 0 && g1.size() != 0) {
-                    gen2.add(g1.get(i));
-                    gen1.add(g2.get(i));
-
-                }
+            for (int i =index; i < genotype1.getGenotype().size(); i++) {
+                    gen2.add(genotype1.getGenotype().get(i));
+                    gen1.add(genotype2.getGenotype().get(i));
             }
 
             newGenotypes.add(new Genotype(gen1));

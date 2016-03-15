@@ -9,7 +9,7 @@ public class BCP {
     private static final String FILE_NAME = "GEOM20.col";
     private static final int MAX_GENERATE_RAND = 100;
     private static final int MAX_ITER =100;
-    private static final int SIZE_OF_POPULATION = 200;
+    private static final int SIZE_OF_POPULATION = 100;
     private static final int SIZE_OF_GENOTYPE = 20;     //equals num of vertices in graph
     private static final double ALPHA_PARAM = 0.9;
     private static final double STOP_EVAL_VALUE = 25;
