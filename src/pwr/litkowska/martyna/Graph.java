@@ -86,7 +86,7 @@ public class Graph {
         int invalidEdges = 0;
         for (Edge e:edges){
             if(!e.isValid()){
-                invalidEdges += 1;
+                invalidEdges++;
             }
         }
         return invalidEdges;
@@ -94,10 +94,23 @@ public class Graph {
 
     public void setColors(Genotype genotype)
     {
-        for(int i = 0; i<genotype.getGenotype().size(); i++){
+        for(int i = 0; i<numberOfVertices; i++){
             findVertById(i+1).setColor(genotype.getGenotype().get(i));
         }
         this.genotype = genotype;
+    }
+
+    public int getSumOfInvalidEdges(){
+        int invalidEdges = 0;
+        for (Edge e:edges){
+            if(!e.isValid()){
+                invalidEdges += e.getWeight();
+//                invalidEdges+=e.getVert1().getColor().getValue();
+//                invalidEdges+=e.getVert2().getColor().getValue();
+//                invalidEdges += Math.abs(e.getVert1().getColor().getValue()-e.getVert2().getColor().getValue());
+            }
+        }
+        return invalidEdges;
     }
 
     public String toString(){

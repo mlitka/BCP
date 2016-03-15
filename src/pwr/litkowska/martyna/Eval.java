@@ -15,21 +15,32 @@ public class Eval {
         evaluationValue = 0;
     }
 
-    public double evaluate(Genotype genotype){
+    public double evaluate(Genotype genotype) {
+        genotype.normalize();
         this.graph.setColors(genotype);
-        evaluationValue = alpha*genotype.getMaxColor().getValue() + (1-alpha)*graph.getNumOfInvalidEdges();
+        evaluationValue = (genotype.getMaxColor().getValue()-genotype.getMinColor().getValue())*alpha + (1-alpha)*(graph.getNumOfInvalidEdges());
+//        evaluationValue = evaluationValue*evaluationValue*evaluationValue;
 //        graph.getGenotype().setEvaluationValue(evaluationValue);
         genotype.setEvaluationValue(evaluationValue);
+        genotype.setNumOfInvalidEdges(graph.getNumOfInvalidEdges());
+
+        System.out.println("INVALID!!  " + graph.getSumOfInvalidEdges());
         return evaluationValue;
     }
 
-    public void evaluatePopulation(Population population){
-        for (Genotype genotype:population.getPopulation()){
-            if (genotype.getGenotype().size()!=0)evaluate(genotype);
+    public double evaluatePopulation(Population population) {
+        double sum = 0;
+        for (Genotype genotype : population.getPopulation()) {
+            sum += evaluate(genotype);
         }
+        return sum;
     }
 
-    public String toString(){
+    public double getAvgOfPop(Population population) {
+        return this.evaluatePopulation(population) / population.getNumOfGenotypesInPop();
+    }
+
+    public String toString() {
         return "EVAL = " + String.valueOf(evaluationValue) + "\nNUMBER OF INVALID EDGES = " + graph.getNumOfInvalidEdges();
     }
 }

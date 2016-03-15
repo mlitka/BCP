@@ -6,22 +6,27 @@ package pwr.litkowska.martyna;
 public class Mutation {
 
     private double probabilityOfMutation;
+    private int maxGenerateColor;
 
-    public Mutation(double probabilityOfMutation) {
+    public Mutation(double probabilityOfMutation, int maxGenerateColor) {
         this.probabilityOfMutation = probabilityOfMutation;
+        this.maxGenerateColor = maxGenerateColor;
     }
 
-    public Population mutate(Population population){
-        population.sortPopulation();
-        Genotype genotype1;
-        for (int i= population.getNumOfGenotypesInPop()/2; i<population.getNumOfGenotypesInPop(); i++){
-            if (Math.random()>probabilityOfMutation){
-                genotype1 = population.getPopulation().get((int)(Math.random() * ((population.getNumOfGenotypesInPop() - 2) + 1)));
-
-            }
+    public void mutate(Population population) {
+//        population.sortPopulation();
+        Color color = new Color();
+        for (int i = 0; i < population.getNumOfGenotypesInPop(); i++) {
+                if (Math.random()<probabilityOfMutation) {
+//                genotype1 = population.getPopulation().get(population.getNumOfGenotypesInPop() / 2
+//                        + (int) (Math.random() * ((population.getNumOfGenotypesInPop() - population.getNumOfGenotypesInPop() / 2 - 1) + 1)));
+                    Genotype genotype1 = population.getPopulation().get((int) (Math.random() * ((population.getNumOfGenotypesInPop() - 1) + 1)));
+                    for (int j = 0; j < genotype1.getSize(); j++) {
+                        if (Math.random() < probabilityOfMutation) {
+                            genotype1.setColorValueAtIndex(j, color.generateColorValue(maxGenerateColor));
+                        }
+                    }
+                }
         }
-
-
-        return population;
     }
 }

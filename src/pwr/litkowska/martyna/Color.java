@@ -15,12 +15,16 @@ public class Color {
         this.value = value;
     }
 
-    public String toString(){
+    public String toString() {
         return " {c: " + value + "}";
     }
 
-    public void generateColor(int max){
-        this.value = 1 + (int)(Math.random() * ((max - 1) + 1));
+    public void generateColor(int max) {
+        this.value = generateColorValue(max);
+    }
+
+    public int generateColorValue(int max){
+        return 1 + (int) (Math.random() * ((max - 1) + 1));
     }
 
     public int getValue() {
