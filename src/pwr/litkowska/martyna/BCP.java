@@ -11,7 +11,7 @@ public class BCP {
     private static final int MAX_ITER =100;
     private static final int SIZE_OF_POPULATION = 100;
     private static final int SIZE_OF_GENOTYPE = 20;     //equals num of vertices in graph
-    private static final double ALPHA_PARAM = 0.9;
+    private static final double ALPHA_PARAM = 0.6;
     private static final double STOP_EVAL_VALUE = 25;
     private static final int NUM_OF_CROSSOVERS = 100;
     private static final double CROSSOVER_PROBABILITY = 0.6;
@@ -75,8 +75,8 @@ public class BCP {
 
             if (bestOfPop <= bestE) {
 //                population.getPopulation().get(indexOfFoundPop).normalize();
-                best = population.getBestGenotypeOfPopulation();
-//                best.setEvaluationValue(population.getBestGenotypeOfPopulation().getEvaluationValue());
+                best = new Genotype(population.getBestGenotypeOfPopulation().getGenotype());
+                best.setEvaluationValue(population.getBestGenotypeOfPopulation().getEvaluationValue());
                 bestE = bestOfPop;
 //                eval.evaluate(best);
                 System.out.println("IF--> "+best);

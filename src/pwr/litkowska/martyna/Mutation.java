@@ -17,7 +17,6 @@ public class Mutation {
 //        population.sortPopulation();
         Color color = new Color();
         for (int i = 0; i < population.getNumOfGenotypesInPop(); i++) {
-                if (Math.random()<probabilityOfMutation) {
 //                genotype1 = population.getPopulation().get(population.getNumOfGenotypesInPop() / 2
 //                        + (int) (Math.random() * ((population.getNumOfGenotypesInPop() - population.getNumOfGenotypesInPop() / 2 - 1) + 1)));
                     Genotype genotype1 = population.getPopulation().get((int) (Math.random() * ((population.getNumOfGenotypesInPop() - 1) + 1)));
@@ -25,7 +24,6 @@ public class Mutation {
                         if (Math.random() < probabilityOfMutation) {
                             genotype1.setColorValueAtIndex(j, color.generateColorValue(maxGenerateColor));
                         }
-                    }
                 }
         }
     }

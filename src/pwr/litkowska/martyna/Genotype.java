@@ -28,6 +28,12 @@ public class Genotype implements Comparable<Genotype> {
 
     }
 
+    public void addColors(List<Color> colors){
+        for (Color c: colors){
+            genotype.add(new Color(c.getValue()));
+        }
+    }
+
     public void generateGenotype() {
         for (int i = 0; i < size; i++) {
             Color color = new Color();
@@ -106,6 +112,14 @@ public class Genotype implements Comparable<Genotype> {
 
     public void setNumOfInvalidEdges(int numOfInvalidEdges) {
         this.numOfInvalidEdges = numOfInvalidEdges;
+    }
+
+    public int getMax_generate() {
+        return max_generate;
+    }
+
+    public void setMax_generate(int max_generate) {
+        this.max_generate = max_generate;
     }
 
     @Override

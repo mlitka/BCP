@@ -105,15 +105,18 @@ public class Population {
 
     public void addGenotype(Genotype genotype) {
 
+        Genotype g = new Genotype(genotype.getSize(), genotype.getMax_generate());
+        g.setEvaluationValue(genotype.getEvaluationValue());
+        g.addColors(genotype.getGenotype());
         if (numOfGenotypesInPop >= size) {
             if (this.getW0rstGenotypeOfPopulation().getEvaluationValue() > genotype.getEvaluationValue()){
                 this.removeGenotype(this.getW0rstGenotypeOfPopulation());
-                this.population.add(genotype);
+                this.population.add(g);
                 numOfGenotypesInPop++;
             }
 
         } else {
-            this.population.add(genotype);
+            this.population.add(g);
             numOfGenotypesInPop++;
         }
 
@@ -129,8 +132,9 @@ public class Population {
 
     public void setSelected(Population selected) {
         this.population.clear();
-        this.population = selected.getPopulation();
-        this.numOfGenotypesInPop = selected.numOfGenotypesInPop;
+//        this.population = selected.getPopulation();
+        this.numOfGenotypesInPop = 0;
+        this.addGenotypes(selected.getPopulation());
     }
 
     public double getMinEval(){
