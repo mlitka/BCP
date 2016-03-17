@@ -55,15 +55,17 @@ public class HillClimbing {
 
             for (int i = 0; i<genotype1.getGenotype().size(); i++){
                 int index = (int) (Math.random() * ((genotype1.getGenotype().size() - 1) + 1));
-                genotype1.setColorValueAtIndex(index, this.getLowerColorValue(genotype.getGenotype().get(index).getValue()));
-                eval.evaluate(genotype1);
-                if(genotype1.getEvaluationValue()<genotype.getEvaluationValue()){
-                    genotype = new Genotype(genotype1.getGenotype());
-                    genotype.setEvaluationValue(genotype1.getEvaluationValue());
+                genotype1copy.setColorValueAtIndex(index, this.getLowerColorValue(genotype.getGenotype().get(index).getValue()));
+                eval.evaluate(genotype1copy);
+                if(genotype1copy.getEvaluationValue()<genotype.getEvaluationValue()) {
+                    genotype = new Genotype(SIZE_OF_GENOTYPE, MAX_GENERATE_RAND);
+                    genotype.addColors(genotype1copy.getGenotype());
+                    genotype.setEvaluationValue(genotype1copy.getEvaluationValue());
                     break;
                 }
                 genotype1copy = new Genotype(SIZE_OF_GENOTYPE, MAX_GENERATE_RAND);
-                genotype1copy.addColors(genotype.getGenotype());
+                genotype1copy.addColors(genotype1.getGenotype());
+                genotype1copy.setEvaluationValue(genotype1.getEvaluationValue());
 
                 if(i==(genotype1.getGenotype().size()-1)){
                     foundBetterGen = false;
