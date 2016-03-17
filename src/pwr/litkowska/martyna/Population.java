@@ -52,15 +52,8 @@ public class Population {
 
     public int checkStopCondition(double stopCond) {
         int check = -1;
-//        for (Genotype genotype : population) {
-//            if (genotype.getEvaluationValue() > 0 && genotype.getEvaluationValue() <= stopCond) {
-//                check = population.indexOf(genotype);
-//
-//                break;
-//            }
-//        }
         Genotype genotype = this.getBestGenotypeOfPopulation();
-        if (genotype.getEvaluationValue()<=stopCond)
+        if (genotype.getEvaluationValue() <= stopCond)
             check = population.indexOf(genotype);
         return check;
     }
@@ -109,7 +102,7 @@ public class Population {
         g.setEvaluationValue(genotype.getEvaluationValue());
         g.addColors(genotype.getGenotype());
         if (numOfGenotypesInPop >= size) {
-            if (this.getW0rstGenotypeOfPopulation().getEvaluationValue() > genotype.getEvaluationValue()){
+            if (this.getW0rstGenotypeOfPopulation().getEvaluationValue() > genotype.getEvaluationValue()) {
                 this.removeGenotype(this.getW0rstGenotypeOfPopulation());
                 this.population.add(g);
                 numOfGenotypesInPop++;
@@ -124,7 +117,7 @@ public class Population {
     }
 
     public void addGenotypes(List<Genotype> genotypes) {
-        for (Genotype genotype : genotypes){
+        for (Genotype genotype : genotypes) {
             this.addGenotype(genotype);
 
         }
@@ -132,25 +125,24 @@ public class Population {
 
     public void setSelected(Population selected) {
         this.population.clear();
-//        this.population = selected.getPopulation();
         this.numOfGenotypesInPop = 0;
         this.addGenotypes(selected.getPopulation());
     }
 
-    public double getMinEval(){
+    public double getMinEval() {
         return this.getBestGenotypeOfPopulation().getEvaluationValue();
     }
 
-    public double getMaxEval(){
+    public double getMaxEval() {
         return this.getW0rstGenotypeOfPopulation().getEvaluationValue();
     }
 
-    public double getAvgEval(){
+    public double getAvgEval() {
         double sum = 0;
         for (Genotype g : population) {
-            sum+=g.getEvaluationValue();
+            sum += g.getEvaluationValue();
         }
-        return sum/numOfGenotypesInPop;
+        return sum / numOfGenotypesInPop;
     }
 
     public List<Genotype> getPopulation() {

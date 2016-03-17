@@ -1,8 +1,7 @@
 package pwr.litkowska.martyna;
 
-import sun.security.util.Debug;
-
-import java.io.*;
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -28,21 +27,20 @@ public class Graph {
         Scanner scanner = new Scanner(new File(fileName));
         String strLine;
         Scanner line = new Scanner("");
-        while(scanner.hasNextLine()){
+        while (scanner.hasNextLine()) {
             strLine = scanner.nextLine();
             line = new Scanner(strLine);
-            if(strLine.startsWith("c")){
+            if (strLine.startsWith("c")) {
                 continue;
-            } else if(strLine.startsWith("p")) {
+            } else if (strLine.startsWith("p")) {
                 line.skip("p band");
                 numberOfVertices = line.nextInt();
-//                numberOfEdges = line.nextInt();
                 makeVertices();
-            } else if(strLine.startsWith("e")){
+            } else if (strLine.startsWith("e")) {
                 line.skip("e");
                 int id1 = line.nextInt();
                 int id2 = line.nextInt();
-                if(id1!=id2){
+                if (id1 != id2) {
                     edges.add(new Edge(findVertById(id1), findVertById(id2), line.nextInt()));
                     numberOfEdges++;
                 }
@@ -55,16 +53,16 @@ public class Graph {
 
     }
 
-    public void makeVertices(){
-        for(int i = 0; i<numberOfVertices; i++){
-            vertices.add(new Vertex(i+1));
+    public void makeVertices() {
+        for (int i = 0; i < numberOfVertices; i++) {
+            vertices.add(new Vertex(i + 1));
         }
     }
 
-    public Vertex findVertById(int vertId){
+    public Vertex findVertById(int vertId) {
         Vertex vertex = null;
-        for(Vertex v:vertices){
-            if(v.getId() == vertId){
+        for (Vertex v : vertices) {
+            if (v.getId() == vertId) {
                 vertex = v;
                 break;
             }
@@ -72,38 +70,37 @@ public class Graph {
         return vertex;
     }
 
-    public boolean isValid(){
+    public boolean isValid() {
         boolean isValid = true;
-        for (Edge e:edges){
-            if(!e.isValid()){
+        for (Edge e : edges) {
+            if (!e.isValid()) {
                 isValid = e.isValid();
             }
         }
         return isValid;
     }
 
-    public int getNumOfInvalidEdges(){
+    public int getNumOfInvalidEdges() {
         int invalidEdges = 0;
-        for (Edge e:edges){
-            if(!e.isValid()){
+        for (Edge e : edges) {
+            if (!e.isValid()) {
                 invalidEdges++;
             }
         }
         return invalidEdges;
     }
 
-    public void setColors(Genotype genotype)
-    {
-        for(int i = 0; i<numberOfVertices; i++){
-            findVertById(i+1).setColor(genotype.getGenotype().get(i));
+    public void setColors(Genotype genotype) {
+        for (int i = 0; i < numberOfVertices; i++) {
+            findVertById(i + 1).setColor(genotype.getGenotype().get(i));
         }
         this.genotype = genotype;
     }
 
-    public int getSumOfInvalidEdges(){
+    public int getSumOfInvalidEdges() {
         int invalidEdges = 0;
-        for (Edge e:edges){
-            if(!e.isValid()){
+        for (Edge e : edges) {
+            if (!e.isValid()) {
                 invalidEdges += e.getWeight();
 //                invalidEdges+=e.getVert1().getColor().getValue();
 //                invalidEdges+=e.getVert2().getColor().getValue();
@@ -113,10 +110,10 @@ public class Graph {
         return invalidEdges;
     }
 
-    public String toString(){
-       String toStr = "Verices: "+numberOfVertices+"\nEdges: "+numberOfEdges;
-        for(Edge e:edges){
-            toStr+="\n";
+    public String toString() {
+        String toStr = "Verices: " + numberOfVertices + "\nEdges: " + numberOfEdges;
+        for (Edge e : edges) {
+            toStr += "\n";
             toStr += e.toString();
         }
         return toStr;

@@ -18,13 +18,9 @@ public class Eval {
     public double evaluate(Genotype genotype) {
         genotype.normalize();
         this.graph.setColors(genotype);
-        evaluationValue = (genotype.getMaxColor().getValue()-genotype.getMinColor().getValue())*alpha + (1-alpha)*(graph.getNumOfInvalidEdges());
-//        evaluationValue = evaluationValue*evaluationValue*evaluationValue;
-//        graph.getGenotype().setEvaluationValue(evaluationValue);
+        evaluationValue = (genotype.getMaxColor().getValue() - genotype.getMinColor().getValue()) * alpha + (1 - alpha) * (graph.getNumOfInvalidEdges());
         genotype.setEvaluationValue(evaluationValue);
         genotype.setNumOfInvalidEdges(graph.getNumOfInvalidEdges());
-
-        System.out.println("INVALID!!  " + graph.getSumOfInvalidEdges());
         return evaluationValue;
     }
 

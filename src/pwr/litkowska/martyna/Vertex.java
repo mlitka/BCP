@@ -12,7 +12,7 @@ public class Vertex {
         this.color = new Color();
     }
 
-    public String toString(){
+    public String toString() {
         return "Id: " + id + color;
     }
 

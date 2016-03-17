@@ -14,12 +14,12 @@ public class Edge {
         this.vert2 = vert2;
     }
 
-    public String toString(){
-        return "V1 " + vert1 + "   V2 " + vert2 + "    W: "+weight;
+    public String toString() {
+        return "V1 " + vert1 + "   V2 " + vert2 + "    W: " + weight;
     }
 
-    public boolean isValid(){
-        return (Math.abs(vert1.getColor().getValue() - vert2.getColor().getValue())>=weight) && (vert2.getColor().getValue()!=vert1.getColor().getValue());
+    public boolean isValid() {
+        return (Math.abs(vert1.getColor().getValue() - vert2.getColor().getValue()) >= weight) && (vert2.getColor().getValue() != vert1.getColor().getValue());
     }
 
     public int getWeight() {

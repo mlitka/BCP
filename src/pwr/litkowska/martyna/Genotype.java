@@ -28,8 +28,8 @@ public class Genotype implements Comparable<Genotype> {
 
     }
 
-    public void addColors(List<Color> colors){
-        for (Color c: colors){
+    public void addColors(List<Color> colors) {
+        for (Color c : colors) {
             genotype.add(new Color(c.getValue()));
         }
     }
@@ -75,14 +75,14 @@ public class Genotype implements Comparable<Genotype> {
         return toStr;
     }
 
-    public void normalize(){
+    public void normalize() {
         int min = this.getMinColor().getValue();
-        for (Color color: genotype) {
-            color.setValue(color.getValue()-min);
+        for (Color color : genotype) {
+            color.setValue(color.getValue() - min);
         }
     }
 
-    public void setColorValueAtIndex(int index, int value){
+    public void setColorValueAtIndex(int index, int value) {
         this.genotype.get(index).setValue(value);
     }
 
